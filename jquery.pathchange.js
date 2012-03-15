@@ -20,7 +20,7 @@
   $.fn.pathchange = function(handler) {
     return handler ? this.bind("pathchange", handler) : this.trigger("pathchange");
   };
-
+	
   var my = $.pathchange = {
     // default options
     options: {
@@ -30,6 +30,8 @@
       interceptLinks: true, // do we intercept all relative links to avoid some page reloads?
       disableHashLinks: true // do we ensure all links with href=# are not followed (this would mess with our history)?
     },
+    
+    historyReady: false, // fix webkit bug
 
     // call this once when your app is ready to use pathchange
     init: function(options) {
@@ -39,10 +41,10 @@
       // Listen to the HTML5 "popstate" event, if supported and desired
       if (my.options.useHistory && my.detectHistorySupport()) {
         $(window).bind("popstate", function(e) {
-          if (window.history.ready) { // fix webkit bug
+          if (my.historyReady) { // fix webkit bug
           	$(window).trigger("pathchange");
           }
-          window.history.ready = true; // fix webkit bug
+          my.historyReady = true; // fix webkit bug
         });
       }
 
@@ -82,7 +84,7 @@
 
     // Call to manually navigate the app somewhere
     changeTo: function(path) {
-		window.history.ready = true; // fix webkit bug
+		my.historyReady = true; // fix webkit bug
       // If we're using History Management, just push an entry
       if (my.options.useHistory && my.detectHistorySupport()) {
         window.history.pushState(null, null, path);
