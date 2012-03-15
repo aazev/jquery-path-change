@@ -2,4 +2,4 @@ This is a jquery plugin for managing programatic change/tracking of browser URL 
 
 This plugin was authored by Ben Cherry (bcherry@gmail.com), and is released under an MIT License (do what you want with it).
 
-I, Bruno Cassol (brunocassol@gmail.com) hacked it to fix a bug in WebKit (Chrome, Safari) where it would call popstate even after a full page load.
+I, Bruno Cassol (brunocassol@gmail.com) hacked it to fix a bug in WebKit (Chrome, Safari) where it would incorreclty call popstate just after a full page load.
