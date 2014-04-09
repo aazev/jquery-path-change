@@ -68,7 +68,7 @@
 
       // Intercept all relative links on the page, to avoid unneccesary page refreshes
       if (my.options.interceptLinks) {
-        $("body").delegate("a[href^=/]", "click", function(e) {
+        $("body").delegate("a[href^='/']", "click", function(e) {
           my.changeTo($(this).attr("href"));
           e.preventDefault();
         });
@@ -76,7 +76,7 @@
 
       // Ensure all the href=# links on the page don't mess with things
       if (my.options.disableHashLinks) {
-        $("body").delegate("a[href=#]", "click", function(e) {
+        $("body").delegate("a[href='#']", "click", function(e) {
           e.preventDefault();
         });
       }
